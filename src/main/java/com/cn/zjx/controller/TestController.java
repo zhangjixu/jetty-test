@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * @Author: zhangjixu
  * @CreateDate: 2018/9/14
- * @Description:
+ * @Description: 使用 maven jetty 插件部署项目
  * @Version: 1.0.0
  */
 @Controller
