@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:task="http://www.springframework.org/schema/task"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+
+    <!-- 导入 mysql redis solr mongodb mybatis 等配置文件 -->
+    <import resource="classpath*:spring-mysql.xml"/>
+
+    <!-- 自动扫描该目录下的@Component @Controller @Service等这些注解的类，则把这些类注册为bean-->
+    <context:component-scan base-package="com.cn">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 在使用注解的时候 如果不指定名字，会使用 asyncExecutor -->
+    <task:annotation-driven executor="asyncExecutor" />
+    <!-- 当最小的线程数已经被占用满后，新的任务会被放进queue里面，当这个queue的capacity也被占满之后，pool里面会创建新线程处理这个任务，
+    直到总线程数达到了max size，这时系统会拒绝这个任务并抛出TaskRejectedException异常 -->
+    <task:executor id="asyncExecutor" pool-size="5-10" queue-capacity="2"/>
+
+
+</beans>
