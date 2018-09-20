@@ -1,5 +1,6 @@
 package com.cn.zjx;
 
+import com.cn.zjx.utils.ConfigUtils;
 import com.cn.zjx.utils.ReflectUtils;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
@@ -7,7 +8,9 @@ import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URLDecoder;
+import java.util.Properties;
 
 /**
  * @Author: zhangjixu
@@ -17,9 +20,25 @@ import java.net.URLDecoder;
  */
 public class JettyStart {
 
+    private static String deploy;
+
+    static {
+        try {
+            Properties properties = ConfigUtils.getProperties("/config/deploy.properties");
+            deploy = properties.getProperty("env");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void main(String[] args) throws Exception {
-        devEnvironment();
-        //proEnvironment();
+        if ("dev".equals(deploy))
+         devEnvironment();
+        else if ("pro".equals(deploy))
+            proEnvironment();
+
+        System.out.println(" ================== " + deploy);
     }
 
     /**

@@ -52,7 +52,7 @@ public class TestController {
     @ResponseBody
     public Object getMysql() {
       String sql = "select * from job limit 1;";
-      List list = mysqlJdbcTemplate.queryForList(sql, Map.class);
+      List list = mysqlJdbcTemplate.queryForList(sql);
       System.out.println(list.get(0));
       return list.get(0);
     }
