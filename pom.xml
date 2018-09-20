@@ -211,7 +211,6 @@
                                     <fileset dir="${project.build.directory}/classes">
                                         <include name="**/*/JettyStart.class"></include>
                                         <include name="**/*/ReflectUtils.class"></include>
-                                        <include name="**/*/ConfigUtils.class"></include>
                                     </fileset>
                                 </copy>
                             </tasks>
@@ -237,7 +236,6 @@
             <build>
                 <filters>
                     <filter>src/main/resources/develop/mysql.properties</filter>
-                    <filter>src/main/resources/develop/deploy.properties</filter>
                 </filters>
             </build>
         </profile>
@@ -247,7 +245,6 @@
             <build>
                 <filters>
                     <filter>src/main/resources/produced/mysql.properties</filter>
-                    <filter>src/main/resources/produced/deploy.properties</filter>
                 </filters>
             </build>
         </profile>
